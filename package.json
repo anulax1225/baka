@@ -1,0 +1,11 @@
+{
+    "name": "Bakacrypt",
+    "author": "anulax1225",
+    "git": "",
+    "packages": [
+        {
+            "author": "anulax1225",
+            "name": "bakatools"
+        }
+    ]
+}

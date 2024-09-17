@@ -1,0 +1,13 @@
+/vendor/
+/bin/
+/bin-int/
+/.vscode/
+/.vs/
+/docs/
+**.log
+**.sln
+**.vcxproj*
+**.make
+**Makefile
+**dependencies.lua
+**linker.lua
