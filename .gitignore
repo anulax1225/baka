@@ -4,10 +4,14 @@
 /.vscode/
 /.vs/
 /docs/
+/.cache/
 **.log
+**.ninja
 **.sln
 **.vcxproj*
 **.make
 **Makefile
 **dependencies.lua
 **linker.lua
+/compile_commands/
+**compile_commands.json

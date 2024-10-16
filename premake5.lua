@@ -1,4 +1,4 @@
-workspace "Bakacrypt"
+workspace "graphics"
     architecture "x64"
     configurations { "Debug", "Release" }
     startproject "App"
@@ -9,6 +9,7 @@ workspace "Bakacrypt"
     }
 
     linkgroups "On"
+    toolset "clang"
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
 include "dependencies.lua"
