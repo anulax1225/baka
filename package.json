@@ -2,5 +2,10 @@
     "name": "transProxy",
     "author": "anulax1225",
     "git": "",
-    "packages": []
+    "packages": [
+        {
+            "author": "anulax1225",
+            "name": "bakanet"
+        }
+    ]
 }

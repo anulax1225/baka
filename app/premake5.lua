@@ -35,7 +35,7 @@ filter "configurations:Release"
     optimize "on"
 
 filter "system:windows"
-    buildoptions "/MT"
+    buildoptions { "/MT", "/utf-8" }
     staticruntime "on"
     defines 
     { 
