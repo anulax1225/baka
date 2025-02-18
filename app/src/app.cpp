@@ -1,17 +1,19 @@
 #include <bakatools.h>
 #include <bakanet.h>
 
-#define minPort 8000
-#define maxPort 8000 
-#define target "127.0.0.1"
+#define MIN_PORT 8000
+#define MAX_PORT 8000 
+#define RANGE MAX_PORT - MIN_PORT + 1
+#define TARGET "127.0.0.1"
 
 using namespace Bk;
 using namespace Bk::Net;
 
 struct Binder 
 {
-    Scope<Socket> src;
-    int port;
+    Scope<Socket> src = nullptr;
+    Scope<Socket> dest = nullptr;
+    int port = 0;
 
     Binder(Scope<Socket> src, int port)
     :src(std::move(src)), port(port) { }
@@ -20,40 +22,39 @@ struct Binder
 
 int main()
 {
+    //Log::Init("Bakanet");
+    ////hostent* h = gethostbyname("localhost");
+    ////BK_INFO(std::string(h->h_addr_list[0], h->h_length));
+    //IpAddress ip("127.0.0.1");
+    //HttpServer server(ip, 8080);
+    //server.get("/", [](HttpRequest& req)
+    //{
+    //    HttpReponse res(HTTP_RES_200, req.version);
+    //    res.body = "<h1>Bakanet</h1>";
+    //    res.body += "<p>Working http server</p>";
+    //    res.body += "\n<p>URL /</p>";
+    //    return res;
+    //});
+    //server.start();
+    //return 0;
+
+
     Log::Init("Bakanet");
-    //hostent* h = gethostbyname("localhost");
-    //BK_INFO(std::string(h->h_addr_list[0], h->h_length));
-    IpAddress ip("127.0.0.1");
-    HttpServer server(ip, 8080);
-    server.get("/", [](HttpRequest& req)
-    {
-        HttpReponse res(HTTP_RES_200, req.version);
-        res.body = "<h1>Bakanet</h1>";
-        res.body += "<p>Working http server</p>";
-        res.body += "\n<p>URL /</p>";
-        return res;
-    });
-    server.start();
-    return 0;
-
-
-    /*Log::Init("Bakanet");
-    IpAddress src("192.168.10.235");
+    IpAddress src;
     ThreadPool pool(5);
-    int range = maxPort - minPort + 1;
-    int ports[maxPort - minPort + 1];
 
     std::vector<Binder> sockets;
-    sockets.reserve(range);
+    sockets.reserve(RANGE);
 
-    for (int i = 0; i < range; i++)
+    for (int i = 0; i < RANGE; i++)
     {
-        int port = minPort + i;
+        int port = MIN_PORT + i;
         Binder bind = {
             CreateScope<Socket>(Socket::create(src, port, IpProtocol::TCP)),
+
             port
         };
-        if (!(bind.src->init() && bind.src->start(10))) throw new std::exception("Error");
+        if (!(bind.src->init() && bind.src->start(10))) throw new std::exception(Tools::string_format("Couldn't bind on port %d", port));
         sockets.push_back(bind);
     }
 
@@ -87,5 +88,4 @@ int main()
         }
     } 
     return 0;
-    */
 }
