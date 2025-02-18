@@ -21,9 +21,9 @@ struct Binder
 int main()
 {
     Log::Init("Bakanet");
-    auto myLocalIPs = dns_lookup("google.com", IpVersion::IPv4);
-    for(auto i : myLocalIPs) BK_INFO(i);
-    IpAddress ip(myLocalIPs[0]);
+    //hostent* h = gethostbyname("localhost");
+    //BK_INFO(std::string(h->h_addr_list[0], h->h_length));
+    IpAddress ip("127.0.0.1");
     HttpServer server(ip, 8080);
     server.get("/", [](HttpRequest& req)
     {
